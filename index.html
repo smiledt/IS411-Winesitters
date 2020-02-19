@@ -9,15 +9,25 @@
   </head>
   <body>
     <h1>Wine Sitter Recipe Home</h1>
-    <button>Login</button>
-    <div id="Login">
+    <div style="text-align: right" id="Login">
     	<link rel="stylesheet" type="text/css" href="css/format.css">
+    	<button id="loginbutton">Login</button>
     </div>
-  </body>
-  <body>
-  	<form action"process.php" method="POST">
-  		<button>Search</button>
-  		<input type="text" recipe="Search">
+    <form action"process.php" method="POST" style="text-align: left">
+    	<h2>Search</h2>
+    	<div style="text-align: left" id="SearchBox">
+    		<link rel="stylesheet" type="text/css" href="css/format.css">
+    		<input type="text" recipe="Search"></input>
+    		<button id="submitbutton">Submit</button>
+    	</div>
   	</form>
   </body>
+  <body2>
+  	<h3>Recipe Title</h3>
+  	<div style="text-align: left-center" id="RecipeSearch">
+  		<link rel="stylesheet" type="text/css" href="css/format.css">
+  		<input type="text" recipe="Search Recipe"></input>
+  		<button id="searchrecipebutton">Search</button>
+  	</div>
+  </body2>
 </html>
