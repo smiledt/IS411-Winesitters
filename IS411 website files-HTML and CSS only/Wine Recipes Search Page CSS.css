@@ -1,0 +1,11 @@
+label{
+  display: flex;
+  text-align: right;
+  font-size:25px;
+}
+div{
+	display: flex;
+}
+input{
+	height:25px;
+}
