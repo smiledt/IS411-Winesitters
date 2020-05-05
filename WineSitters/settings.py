@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     # My Apps
     'beer_recipes',
     'wine_recipes',
+    'users',
 
     # Third Party Apps
     'bootstrap4',

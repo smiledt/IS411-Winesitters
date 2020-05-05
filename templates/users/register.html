@@ -1,0 +1,20 @@
+{% extends "shared/base.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+  {% if registered %}
+    <h1>Thank you for registering.</h1>
+  {% else %}
+    <h1>New Account</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {{ account_form.as_p }}
+      <input type="submit" name="" value="Register">
+    </form>
+    {% endif %}
+</div>
+
+{% endblock content %}
