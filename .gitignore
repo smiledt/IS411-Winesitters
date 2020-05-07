@@ -1,0 +1,6 @@
+# Untracked files
+
+# We don't want to track migrations or pycache files
+__pycache__/
+migrations/
+*.pyc

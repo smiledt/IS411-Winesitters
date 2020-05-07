@@ -1,0 +1,17 @@
+label{
+  display: flex;
+  text-align: right;
+  font-size:25px;
+}
+div{
+	display: flex;
+}
+input{
+	margin-left:10px;
+	height:25px;
+}
+
+
+
+
+
