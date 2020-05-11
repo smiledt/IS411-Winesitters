@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from wine_recipes.models import WineRecipe
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -9,7 +10,7 @@ def index(request):
     return render(request, 'wine_recipes/index.html')
 
 
-def recipes(request):
+def recipes(request, message="", error=""):
     """ Displays all the recipes in a list """
     # Instantiate a dictionary of recipe objects
     recipes = WineRecipe.objects.order_by('name')
@@ -27,5 +28,15 @@ def view_recipe(request):
         return render(request, 'wine_recipes/view_recipe.html', temp_recipe)
 
 
+@login_required
 def new_recipe(request):
+    """ Add a new recipe """
+    if request.method != 'POST':
+        form = RecipeForm()
+    else:
+        form = RecipeForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return recipes(request, message="Successfully created recipe:" + request.POST['recipe_name'])
+
     return redirect('wine_recipes:index')
