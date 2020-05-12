@@ -1,0 +1,99 @@
+{% load bootstrap4 %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, inital-scale-1,
+    shrink-to-fit=no">
+
+</head>
+
+<body>
+  <header>
+    <div class="collapse bg-dark" id="navbarHeader">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-md-7 py-4">
+            <h4 class="text-white">User Beer Recipes</h4>
+            <p class="text-muted">Use the menu to the right to create or edit your ingredients.
+              Then, use those ingredients to create recipes below.</p>
+          </div>
+          {% if user.is_authenticated %}
+          <!-- Check if the user is logged in -->
+          <div class="col-sm-4 offset-md-1 py-4">
+            <div class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <h4 class="text-white">{{ user.username }}</h4>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">My Account</a>
+                <a class="dropdown-item" href="#">Placeholder</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'users:logout' %}">Log Out</a>
+              </div>
+            </div>
+
+            <ul class="list-unstyled">
+              <li><a href="{% url 'beer_recipes:my_ingredients' %}" class="text-white">My Ingredients</a></li>
+              <li><a href="{% url 'beer_recipes:my_recipes' %}" class="text-white">My Recipes</a></li>
+              <li><a href="{% url 'beer_recipes:recipes' %}" class="text-white">All Recipes</a></li>
+            </ul>
+          </div>
+          {% else %} <! -- User is not logged in -->
+            <div class="col-sm-4 offset-md-1 py-4">
+              <a href="{% url 'users:login' %}">
+                <h4 class="text-white">Log In</h4>
+              </a>
+              <a href="{% url 'users:register' %}">
+                <h4 class="text-white">Register</h4>
+              </a>
+            </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark box-shadow">
+      <div class="container d-flex justify-content-between">
+        <a href="{% url 'beer_recipes:recipes' %}" class="navbar-brand d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+          <strong>Beer Recipes</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- The main content will be loaded in below -->
+  <main role="main">
+    <div id="main_content">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
+      <p>This page is property of WineSitters BrewHouse &copy 2020</p>
+      <a href="https://www.thewinesitters.com/"><address>
+          WineSitter BrewHouse 2711 South Ave La Crosse, WI 54601
+        </address></a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  {% bootstrap_css %}
+  {% bootstrap_javascript jquery='full' %}
+</body>
+
+</html>

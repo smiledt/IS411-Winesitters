@@ -1,0 +1,21 @@
+{% extends 'beer_recipes/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href="{% static "css/beer_recipes/list_ingredient.css" %}" />
+
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="jumbotron-heading">Misc Details</h1>
+  </div>
+</section>
+<div class="album py-5 bg-light">
+  <div class="container">
+    <p>Name: {{ object.name }}</p>
+    <p>Date added: {{ object.date_submitted|date }}</p>
+    <p>Misc Version: {{ object.version }}</p>
+  </div>
+</div>
+{% endblock content %}
