@@ -1,5 +1,5 @@
 from django import forms
-from beer_recipes.models import BeerRecipe, Hop, Fermentable, Yeast, Waters, Misc
+from beer_recipes.models import BeerRecipe, Hop, Fermentable, Yeast, Water, Misc
 
 
 class RecipeForm(forms.ModelForm):
@@ -14,32 +14,32 @@ class HopForm(forms.ModelForm):
     # TODO: Add validation here
     class Meta:
         model = Hop
-        exclude = ['version', 'date_submitted']
+        exclude = ['version', 'date_submitted', 'user']
 
 
 class FermentableForm(forms.ModelForm):
     # TODO: Add validation here
     class Meta:
         model = Fermentable
-        exclude = ['version', 'date_submitted']
+        exclude = ['version', 'date_submitted', 'user']
 
 
 class YeastForm(forms.ModelForm):
     # TODO: Add validation here
     class Meta:
         model = Yeast
-        exclude = ['version', 'date_submitted']
+        exclude = ['version', 'date_submitted', 'user']
 
 
 class MiscForm(forms.ModelForm):
     # TODO: Add validation here
     class Meta:
         model = Misc
-        exclude = ['version', 'date_submitted']
+        exclude = ['version', 'date_submitted', 'user']
 
 
-class WatersForm(forms.ModelForm):
+class WaterForm(forms.ModelForm):
     # TODO: Add validation here
     class Meta:
-        model = Waters
-        exclude = ['version', 'date_submitted']
+        model = Water
+        exclude = ['version', 'date_submitted', 'user']

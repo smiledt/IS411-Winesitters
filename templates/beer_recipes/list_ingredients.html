@@ -1,0 +1,158 @@
+{% extends 'beer_recipes/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href="{% static "css/beer_recipes/list_ingredient.css" %}" />
+
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="jumbotron-heading">My Ingredients</h1>
+    <p class="lead">This is a collection of your submitted Ingredients. Add an Ingredient by clicking a button below.</p>
+    <p>
+      <a href="{% url 'beer_recipes:new_hop' %}" class="btn btn-secondary my-2">Create a New Hop</a>
+      <a href="{% url 'beer_recipes:new_fermentable' %}" class="btn btn-secondary my-2">Create a New Fermentable Ingredient</a>
+      <a href="{% url 'beer_recipes:new_misc' %}" class="btn btn-secondary my-2">Create a New Miscellaneous Ingredient</a>
+      <a href="{% url 'beer_recipes:new_water' %}" class="btn btn-secondary my-2">Create a New Water Profile</a>
+      <a href="{% url 'beer_recipes:new_yeast' %}" class="btn btn-secondary my-2">Create a New Yeast</a>
+    </p>
+  </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    {% if hops %}
+    <!-- Check if there are any hops in the dict -->
+    <h3>Hops:</h3>
+    <div class="row">
+      {% for hop in hops %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <div class="card-body">
+            <h5 class="card-title">{{ hop.name }}</h5>
+            <p class="card-text">{{ hop.description|truncatechars:125 }}...</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'beer_recipes:HopDetails' hop.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                <a href="{% url 'beer_recipes:HopUpdate' hop.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                <a href="{% url 'beer_recipes:HopDelete' hop.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+              </div>
+              <small class="text-muted">{{ hop.date_submitted }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+
+    {% if fermentables %}
+    <!-- Check if there are any fermentables in the dict -->
+    <h3>Fermentables:</h3>
+    <div class="row">
+      {% for fermentable in fermentables %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <div class="card-body">
+            <h5 class="card-title">{{ fermentable.name }}</h5>
+            <p class="card-text">{{ fermentable.description|truncatechars:125 }}...</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'beer_recipes:FermentableDetails' fermentable.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                <a href="{% url 'beer_recipes:FermentableUpdate' fermentable.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                <a href="{% url 'beer_recipes:FermentableDelete' fermentable.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+              </div>
+              <small class="text-muted">{{ fermentable.date_submitted }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if miscs %}
+    <!-- Check if there are any miscs in the dict -->
+    <h3>Miscellaneous Ingredients:</h3>
+    <div class="row">
+      {% for misc in miscs %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <div class="card-body">
+            <h5 class="card-title">{{ misc.name }}</h5>
+            <p class="card-text">{{ misc.description|truncatechars:125 }}...</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'beer_recipes:MiscDetails' misc.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                <a href="{% url 'beer_recipes:MiscUpdate' misc.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                <a href="{% url 'beer_recipes:MiscDelete' misc.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+              </div>
+              <small class="text-muted">{{ misc.date_submitted }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if waters %}
+    <!-- Check if there are any waters in the dict -->
+    <h3>Water Profiles:</h3>
+    <div class="row">
+      {% for water in waters %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <div class="card-body">
+            <h5 class="card-title">{{ water.name }}</h5>
+            <p class="card-text">{{ water.description|truncatechars:125 }}...</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'beer_recipes:WaterDetails' water.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                <a href="{% url 'beer_recipes:WaterUpdate' water.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                <a href="{% url 'beer_recipes:WaterDelete' water.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+              </div>
+              <small class="text-muted">{{ water.date_submitted }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if yeasts %}
+    <!-- Check if there are any yeasts in the dict -->
+    <h3>Yeasts:</h3>
+    <div class="row">
+      {% for yeast in yeasts %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <div class="card-body">
+            <h5 class="card-title">{{ yeast.name }}</h5>
+            <p class="card-text">{{ yeast.description|truncatechars:125 }}...</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'beer_recipes:YeastDetails' yeast.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                <a href="{% url 'beer_recipes:YeastUpdate' yeast.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                <a href="{% url 'beer_recipes:YeastDelete' yeast.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+              </div>
+              <small class="text-muted">{{ yeast.date_submitted }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Check if there are no ingredients at all -->
+    {% if not hops and not fermentables and not miscs and not waters and not yeasts %}
+      <h3>It appears that you have no ingredients created yet. Create one by choosing a button above.</h3>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock content %}

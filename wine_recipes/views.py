@@ -32,11 +32,14 @@ def view_recipe(request):
 def new_recipe(request):
     """ Add a new recipe """
     if request.method != 'POST':
-        form = RecipeForm()
+        # form = RecipeForm()
+        return redirect('wine_recipes:index')
     else:
-        form = RecipeForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            return recipes(request, message="Successfully created recipe:" + request.POST['recipe_name'])
+        return redirect('wine_recipes:index')
+
+        # form = RecipeForm(data=request.POST)
+        # if form.is_valid():
+        #     form.save()
+        #     return recipes(request, message="Successfully created recipe:" + request.POST['recipe_name'])
 
     return redirect('wine_recipes:index')

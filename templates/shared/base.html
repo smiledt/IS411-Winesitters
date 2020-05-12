@@ -1,5 +1,5 @@
 {% load bootstrap4 %}
-
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,7 +25,7 @@
           <a class="nav-link" href="{% url 'wine_recipes:wine_recipes' %}">
             Wine Recipes</a></li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'beer_recipes:beer_recipes' %}">
+          <a class="nav-link" href="{% url 'beer_recipes:index' %}">
             Beer Recipes</a></li>
       </ul>
 
