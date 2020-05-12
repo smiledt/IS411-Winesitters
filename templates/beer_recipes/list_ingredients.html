@@ -34,7 +34,7 @@
             <p class="card-text">{{ hop.description|truncatechars:125 }}...</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="{% url 'beer_recipes:HopDetails' hop.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                <form style="display: inline" action="{% url 'beer_recipes:HopDetails' hop.id %}" method='get'><button type="button" class="btn btn-sm btn-outline-secondary">View</button></form>
                 <a href="{% url 'beer_recipes:HopUpdate' hop.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
                 <a href="{% url 'beer_recipes:HopDelete' hop.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
               </div>

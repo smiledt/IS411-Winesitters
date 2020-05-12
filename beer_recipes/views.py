@@ -187,6 +187,7 @@ def edit_recipe(request, error="", message=""):
 class HopUpdate(UpdateView):
     model = Hop
     fields = ['name', 'description', 'alpha', 'time', 'amount', 'use']
+    success_url = reverse_lazy('beer_recipes:my_ingredients')
 
 
 class HopDelete(DeleteView):
