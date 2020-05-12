@@ -1,48 +1,57 @@
-{% extends 'shared/base.html' %}
+{% extends 'beer_recipes/base.html' %}
 {% load static %}
 
 {% block content %}
-  <link rel="stylesheet" type="text/css" href="{% static "css/beer_search.css" %}"/>
+<link rel="stylesheet" href="{% static "css/beer_recipes/shared.css" %}" />
 
-  <div class="banner-photo">
-    <img src="{% static "pictures/beer_banner.jpg" %}" width="100%" height="602">
-    <br><br>
-  </div>
-
+<section class="jumbotron text-center">
   <div class="container">
-    <div class="jumbotron">
-      <h1>Beer Recipes</h1>
-      <div id="Search Bar">
-      	<input type="text" name"TitleSearch" id="Search Bar"/>
-      	<button>Search</button>
-    	</div>
-      <div id="recipe_table">
-        {% if recipes %} <!-- Check if there are any recipes in the dict -->
-          <table>
-            <thead>
-              <th>Recipe Name</th>
-              <th>Description</th>
-              <th>Submission Date</th>
-            </thead>
-            {% for recipe in recipes %}
-              <form action="{% url 'beer_recipes:view_recipe' %}" id="{{ recipe.name }}" method="get" name="{{ recipe.name }}">
-                <tr>
-                  <td>{{ recipe.name }}</td>
-                  <td>{{ recipe.description }}</td>
-                  <td>{{ recipe.date_submitted }}</td>
-                  <td class="view_recipe_button_cell">
-                    <button name="view_recipe" value="{{ recipe.name }}" form="{{ recipe.name }}" class="btn btn-primary" id="{{ recipe.name }}" onclick="this.form.submit();">View Recipe</button>
-                  </td>
-                </tr>
-              </form>
-            {% endfor %}
-          </table>
-        {% else %} <!-- There are no recipes in the dict -->
-          <h4 id="no_recipes">Sorry, no recipes matched your search. Try again, or add a recipe now!</h4>
-        {% endif %}
-      </div>
-      <a href="{% url 'beer_recipes:new_recipe' %}">Add a new Recipe</a>
-    </div>
+    <h1 class="jumbotron-heading">Recipe Search</h1>
+    <p class="lead">Search for a recipe. Results are shown below.</p>
+    <p>
+      <form class="form-inline mt-2 mt-md-0" action="{% url 'beer_recipes:search_recipes' %}" method='post'> {% csrf_token %}
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name='search_term'>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="submit" id="submit">Search</button>
+      </form>
+    </p>
   </div>
+</section>
+
+<div class="album py-5 bg-light">
+  <div class="container">
+    {% if error %}
+      <h4 style="color:red;">{{ error }}</h4>
+    {% endif %}
+    <div class="row">
+      {% if recipes %}
+      <!-- Check if there are any recipes in the dict -->
+      {% for recipe in recipes %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          {% if not recipe.image %}
+          <img class="card-img-top" src="{% static "pictures/shared/no_picture.svg" %}" alt="Card image cap">
+          {% else %}
+          <img class="card-img-top" src="{{ recipe.image.url }}" alt="Card image cap">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.name }}</h5>
+            <p class="card-text">{{ recipe.description|truncatechars:125 }}...</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'beer_recipes:RecipeDetails' recipe.id %}" class="btn btn-sm btn-outline-secondary" role="botton">View</a>
+                {% if recipe.user == user.username %}
+                  <a href="{% url 'beer_recipes:RecipeUpdate' recipe.id %}" class="btn btn-sm btn-outline-secondary" role="botton">Edit</a>
+                  <a href="{% url 'beer_recipes:RecipeDelete' recipe.id %}" class="btn btn-sm btn-outline-secondary" role="botton">Delete</a>
+                {% endif %}
+              </div>
+              <small class="text-muted">{{ recipe.date_submitted }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- {% else %} <!-- There are no recipes in the dict -->
+        <!-- <h4 id="no_recipes">Sorry, no recipes matched your search. Try again, or add a recipe now!</h4> -->
+      {% endif %}
 
 {% endblock content %}

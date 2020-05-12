@@ -205,6 +205,12 @@ class BeerRecipe(models.Model):
     # The total time to boil the wort in minutes.
     boil_time = models.PositiveIntegerField(help_text="In minutes.")
 
+    def image_path(instance, filename):
+        """ Generate an image path """
+        return 'beer_recipes/user_imgs/user_{0}/{1}'.format(instance.user, filename)
+
+    image = models.ImageField(upload_to=image_path, blank=True)
+
     TYPE_CHOICES = [
         ('Extract', 'Extract'),
         ('Partial Mash', 'Partial Mash'),
@@ -212,9 +218,9 @@ class BeerRecipe(models.Model):
     ]  # May be one of “Extract”, “Partial Mash” or “All Grain”
     type = models.CharField(choices=TYPE_CHOICES, max_length=12)
     # TODO: Do I need blank=True here??
-    hops = models.ManyToManyField(Hop)  # Zero or more HOP ingredient records
+    hops = models.ManyToManyField(Hop, blank=True)  # Zero or more HOP ingredient records
     # Zero or more FERMENTABLE ingredients
-    fermentables = models.ManyToManyField(Fermentable)
-    miscs = models.ManyToManyField(Misc)
-    yeasts = models.ManyToManyField(Yeast)
-    waters = models.ManyToManyField(Water)
+    fermentables = models.ManyToManyField(Fermentable, blank=True)
+    miscs = models.ManyToManyField(Misc, blank=True)
+    yeasts = models.ManyToManyField(Yeast, blank=True)
+    waters = models.ManyToManyField(Water, blank=True)

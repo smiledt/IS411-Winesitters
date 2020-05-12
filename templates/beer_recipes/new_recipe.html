@@ -5,7 +5,7 @@
 {% block content %}
 
 <!-- Custom styles for this template -->
-<link rel="stylesheet" href="{% static "css/beer_recipes/new_recipe.css" %}" />
+<link rel="stylesheet" href="{% static "css/beer_recipes/shared.css" %}" />
 
 <section class="jumbotron text-center">
   <div class="container">
@@ -16,29 +16,31 @@
 
 <div class="album py-5 bg-light">
   <div class="container">
-    <form action="{% url 'beer_recipes:new_recipe' %}" method='post' name='new_recipe'>
+    <form action="{% url 'beer_recipes:new_recipe' %}" method='post' name='new_recipe' enctype='multipart/form-data'>
       {% csrf_token %}
       {{ form.name|as_crispy_field }}
       {{ form.description|as_crispy_field}}
       <div class="row">
-        <div class="col-3">
+        <div class="col-4">
           {{ form.brewer|as_crispy_field }}
         </div>
-        <div class="col-3">
+        <div class="col-4">
           {{ form.batch_size|as_crispy_field }}
         </div>
-        <div class="col-3">
+        <div class="col-4">
           {{ form.boil_size|as_crispy_field }}
         </div>
-        <div class="col-3">
+        <div class="col-4">
           {{ form.boil_time|as_crispy_field }}
         </div>
-        <div class="col-3">
+        <div class="col-4">
           {{ form.type|as_crispy_field }}
         </div>
+        <div class="col-4">
+          {{ form.image|as_crispy_field }}
+        </div>
       </div>
-      <!-- {{ form|crispy }} -->
-      <button type="submit" class="btn btn-success">Add Profile</button>
+      <button type="submit" class="btn btn-success">Add Recipe</button>
     </form>
   </div>
 </div>

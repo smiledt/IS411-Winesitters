@@ -6,89 +6,47 @@
 <link rel="stylesheet" href="{% static "css/beer_recipes/recipe_list.css" %}" />
 
 <section class="jumbotron text-center">
-   <div class="container">
-     <h1 class="jumbotron-heading">Beer Recipes</h1>
-     <p class="lead">This is a collection of user submitted Beer Recipes. Find, create, and share recipes with others below.</p>
-     <p>
-       <a href="#" class="btn btn-primary my-2">Search Recipes</a>
-       <a href="{% url 'beer_recipes:new_recipe' %}" class="btn btn-secondary my-2">Create a New Recipe</a>
-     </p>
-   </div>
- </section>
+  <div class="container">
+    <h1 class="jumbotron-heading">Beer Recipes</h1>
+    <p class="lead">This is a collection of user submitted Beer Recipes. Find, create, and share recipes with others below.</p>
+    <p>
+      <a href="{% url 'beer_recipes:search_recipes' %}" class="btn btn-primary my-2">Search Recipes</a>
+      <a href="{% url 'beer_recipes:new_recipe' %}" class="btn btn-secondary my-2">Create a New Recipe</a>
+    </p>
+  </div>
+</section>
 
- <div class="album py-5 bg-light">
-   <div class="container">
+<div class="album py-5 bg-light">
+  <div class="container">
 
-     <div class="row">
-       <!-- This is the first card for reference purposes. TODO: Delete this card -->
-       <div class="col-md-4">
-         <div class="card mb-4 box-shadow">
-           <img class="card-img-top" src="{% static "pictures/shared/no_picture.svg" %}" alt="Card image cap">
-           <div class="card-body">
-             <h5 class="card-title">Test Title Here</h5>
-             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-             <div class="d-flex justify-content-between align-items-center">
-               <div class="btn-group">
-                 <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-               </div>
-               <small class="text-muted">9 mins</small>
-             </div>
-           </div>
-         </div>
-       </div>
-       {% if recipes %}       <!-- Check if there are any recipes in the dict -->
-        {% for recipe in recipes %}
-         <div class="col-md-4">
-           <div class="card mb-4 box-shadow">
-             <img class="card-img-top" src="{% static "pictures/shared/no_picture.svg" %}" alt="Card image cap">
-             <div class="card-body">
-               <h5 class="card-title">{{ recipe.name }}</h5>
-               <p class="card-text">{{ recipe.description|truncatechars:125 }}...</p>
-               <div class="d-flex justify-content-between align-items-center">
-                 <div class="btn-group">
-                   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                   <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                 </div>
-                 <small class="text-muted">{{ recipe.date_submitted }}</small>
-               </div>
-             </div>
-           </div>
-         </div>
-         {% endfor %}
+    <div class="row">
+      {% if recipes %}
+      <!-- Check if there are any recipes in the dict -->
+      {% for recipe in recipes %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          {% if not recipe.image %}
+          <img class="card-img-top" src="{% static "pictures/shared/no_picture.svg" %}" alt="Card image cap">
+          {% else %}
+          <img class="card-img-top" src="{{ recipe.image.url }}" alt="Card image cap">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.name }}</h5>
+            <p class="card-text">{{ recipe.description|truncatechars:125 }}...</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'beer_recipes:RecipeDetails' recipe.id %}" class="btn btn-sm btn-outline-secondary" role="botton">View</a>
+                {% if recipe.user == user.username %}
+                  <a href="{% url 'beer_recipes:RecipeUpdate' recipe.id %}" class="btn btn-sm btn-outline-secondary" role="botton">Edit</a>
+                  <a href="{% url 'beer_recipes:RecipeDelete' recipe.id %}" class="btn btn-sm btn-outline-secondary" role="botton">Delete</a>
+                {% endif %}
+              </div>
+              <small class="text-muted">{{ recipe.date_submitted }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
       {% endif %}
-       <div class="col-md-4">
-         <div class="card mb-4 box-shadow">
-           <img class="card-img-top" src="{% static "pictures/shared/no_picture.svg" %}" alt="Card image cap">
-           <div class="card-body">
-             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-             <div class="d-flex justify-content-between align-items-center">
-               <div class="btn-group">
-                 <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-               </div>
-               <small class="text-muted">9 mins</small>
-             </div>
-           </div>
-         </div>
-       </div>
-       <div class="col-md-4">
-         <div class="card mb-4 box-shadow">
-           <img class="card-img-top" src="{% static "pictures/shared/no_picture.svg" %}" alt="Card image cap">
-           <div class="card-body">
-             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-             <div class="d-flex justify-content-between align-items-center">
-               <div class="btn-group">
-                 <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                 <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-               </div>
-               <small class="text-muted">9 mins</small>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </div>
 
 {% endblock content %}

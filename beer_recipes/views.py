@@ -62,8 +62,25 @@ def my_recipes(request, error="", message=""):
 
     if request.method == 'GET':
         current_user = request.user
+        recipes = BeerRecipe.objects.filter(user=current_user.username)
+        recipes_dict.update({'recipes': recipes})
 
-    return redirect('beer_recipes:index')
+    return render(request, 'beer_recipes/recipe_list.html', recipes_dict)
+
+
+def search_recipes(request, error="", message=""):
+    """ Returns a list of recipes matching the search term (kinda) """
+    recipes_dict = {'error': error, 'message': message}
+
+    if request.method == 'POST':
+        recipes = BeerRecipe.objects.filter(name__icontains = request.POST['search_term'])
+        if recipes:  # Something was found
+            temp_dict = {'recipes': recipes}
+            recipes_dict.update(temp_dict)
+
+        else:  # Nothing was found
+            recipes_dict.update(error = 'Sorry, no recipes matched your search. Try again, or add a recipe now!')
+    return render(request, 'beer_recipes/recipe_search.html', recipes_dict)
 
 
 #  New views here -------------------------------------------------------------
@@ -73,9 +90,11 @@ def new_recipe(request):
     if request.method != 'POST':
         form = RecipeForm()
     else:
-        form = RecipeForm(data=request.POST)
+        form = RecipeForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            new_recipe = form.save(commit=False)
+            new_recipe.user = request.user.username
+            new_recipe.save()
             return recipes(request, message="Successfully created recipe: " + request.POST['name'])
 
     context = {'form': form}
@@ -202,6 +221,7 @@ class HopDetails(DetailView):
 class FermentableUpdate(UpdateView):
     model = Fermentable
     fields = ['name', 'description', 'amount', 'ferm_yield', 'color', 'type']
+    success_url = reverse_lazy('beer_recipes:my_ingredients')
 
 
 class FermentableDelete(DeleteView):
@@ -216,6 +236,7 @@ class FermentableDetails(DetailView):
 class MiscUpdate(UpdateView):
     model = Misc
     fields = ['name', 'description']
+    success_url = reverse_lazy('beer_recipes:my_ingredients')
 
 
 class MiscDelete(DeleteView):
@@ -230,6 +251,7 @@ class MiscDetails(DetailView):
 class WaterUpdate(UpdateView):
     model = Water
     fields = ['name', 'description']
+    success_url = reverse_lazy('beer_recipes:my_ingredients')
 
 
 class WaterDelete(DeleteView):
@@ -244,6 +266,7 @@ class WaterDetails(DetailView):
 class YeastUpdate(UpdateView):
     model = Yeast
     fields = ['name', 'description']
+    success_url = reverse_lazy('beer_recipes:my_ingredients')
 
 
 class YeastDelete(DeleteView):
@@ -252,8 +275,19 @@ class YeastDelete(DeleteView):
 
 class YeastDetails(DetailView):
     model = Yeast
-    success_url = reverse_lazy('beer_recipes:my_ingredients')
 
 
 class RecipeDetails(DetailView):
     model = BeerRecipe
+
+
+class RecipeUpdate(UpdateView):
+    model = BeerRecipe
+    fields = ['name', 'description', 'brewer',
+              'batch_size', 'boil_size', 'boil_time', 'image', 'hops']
+    success_url = reverse_lazy('beer_recipes:recipes')
+
+
+class RecipeDelete(DeleteView):
+    model = BeerRecipe
+    success_url = reverse_lazy('beer_recipes:recipes')

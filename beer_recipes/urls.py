@@ -13,6 +13,7 @@ urlpatterns = [
     path('my_recipes/', views.my_recipes, name='my_recipes'),  # Lists a users recipes
     path('recipes/', views.recipes, name='recipes'),  # Lists all recipes
     path('ingredients/', views.ingredients, name='ingredients'),  # Lists all ingredients
+    path('recipe_search/', views.search_recipes, name='search_recipes'),
 
     # All create url paths -------------------
     path('new_recipe/', views.new_recipe, name='new_recipe'),
@@ -31,7 +32,7 @@ urlpatterns = [
     path('view_yeast/<int:pk>', views.YeastDetails.as_view(), name='YeastDetails'),
 
     # All edit url paths -----------------------
-    path('edit_recipe/', views.edit_recipe, name='edit_recipe'),
+    path('edit_recipe/<int:pk>', views.RecipeUpdate.as_view(), name='RecipeUpdate'),
     path('update_hop/<int:pk>', views.HopUpdate.as_view(), name='HopUpdate'),
     path('edit_fermentable/<int:pk>', views.FermentableUpdate.as_view(), name='FermentableUpdate'),
     path('edit_misc/<int:pk>', views.MiscUpdate.as_view(), name='MiscUpdate'),
@@ -39,6 +40,7 @@ urlpatterns = [
     path('edit_yeast/<int:pk>', views.YeastUpdate.as_view(), name='YeastUpdate'),
 
     # All delete url paths ----------------------------------------------------
+    path('delete_recipe/int<int:pk>', views.RecipeDelete.as_view(), name='RecipeDelete'),
     path('delete_hop/<int:pk>', views.HopDelete.as_view(), name='HopDelete'),
     path('delete_fermentable/<int:pk>', views.FermentableDelete.as_view(), name='FermentableDelete'),
     path('delete_misc/<int:pk>', views.MiscDelete.as_view(), name='MiscDelete'),
