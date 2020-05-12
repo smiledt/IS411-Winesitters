@@ -3,22 +3,23 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+
 <!-- Custom styles for this template -->
 <link rel="stylesheet" href="{% static "css/beer_recipes/shared.css" %}" />
 
 <section class="jumbotron text-center">
   <div class="container">
-    <h1 class="jumbotron-heading">Delete Yeast</h1>
-    <p class="lead">Please confirm below.</p>
+    <h1 class="jumbotron-heading">Edit Recipe</h1>
+    <p class="lead">Edit the recipe by filling out the form below.</p>
   </div>
 </section>
 
 <div class="album py-5 bg-light">
   <div class="container">
-    <form method='post' name='delete_yeast'>
+    <form method='post' name='edit_recipe' enctype='multipart/form-data'>
       {% csrf_token %}
-      Are you sure you would like to delete this Yeast?
-      <button type="submit" class="btn btn-danger">Delete Yeast</button>
+      {{ form|crispy }}
+      <button type="submit" class="btn btn-success">Edit Recipe</button>
     </form>
   </div>
 </div>

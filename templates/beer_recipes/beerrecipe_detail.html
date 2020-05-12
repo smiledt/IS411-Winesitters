@@ -8,16 +8,20 @@
 
 <section class="jumbotron text-center">
   <div class="container">
-    <h1 class="jumbotron-heading">Fermentable Details</h1>
+    <h1 class="jumbotron-heading">Recipe Details</h1>
   </div>
 </section>
 <div class="album py-5 bg-light">
   <div class="container">
+    {% if object.image %}
+      <img src="{{ object.image.url }}" alt="Card image cap" style="max-height:500px;max-width:500px;height:auto;width:auto">
+    {% endif %}
     <p>Name: {{ object.name }}</p>
     <p>Date added: {{ object.date_submitted|date }}</p>
-    <p>Fermentable Version: {{ object.version }}</p>
-    <p>Amount in Kg: {{ object.amount }}</p>
-    <p>Percent Yield: {{ object.ferm_yeild }}%</p>
+    <p>Recipe Version: {{ object.version }}</p>
+    <p>Brewer: {{ object.brewer }}</p>
+    <p>Batch Size: {{ object.batch_size }} liters</p>
+    <p>Boil Size: {{ object.boil_size }} liters</p>
     <p>Type: {{ object.type }}</p>
     {% if object.description %}
       <p>Description: {{ object.description }}</p>

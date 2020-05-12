@@ -3,7 +3,7 @@
 {% block content %}
 
 <!-- Custom styles for this template -->
-<link rel="stylesheet" href="{% static "css/beer_recipes/list_ingredient.css" %}" />
+<link rel="stylesheet" href="{% static "css/beer_recipes/shared.css" %}" />
 
 <section class="jumbotron text-center">
   <div class="container">
@@ -34,9 +34,11 @@
             <p class="card-text">{{ hop.description|truncatechars:125 }}...</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <form style="display: inline" action="{% url 'beer_recipes:HopDetails' hop.id %}" method='get'><button type="button" class="btn btn-sm btn-outline-secondary">View</button></form>
-                <a href="{% url 'beer_recipes:HopUpdate' hop.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
-                <a href="{% url 'beer_recipes:HopDelete' hop.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+                <!-- <form style="display: inline" action="{% url 'beer_recipes:HopDetails' hop.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a> -->
+
+                <a href="{% url 'beer_recipes:HopDetails' hop.id %}" class="btn btn-sm btn-outline-secondary" role="button">View</a>
+                <a href="{% url 'beer_recipes:HopUpdate' hop.id %}" class="btn btn-sm btn-outline-secondary" role="button">Edit</a>
+                <a href="{% url 'beer_recipes:HopDelete' hop.id %}" class="btn btn-sm btn-outline-secondary" role="button">Delete</a>
               </div>
               <small class="text-muted">{{ hop.date_submitted }}</small>
             </div>
@@ -60,9 +62,9 @@
             <p class="card-text">{{ fermentable.description|truncatechars:125 }}...</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="{% url 'beer_recipes:FermentableDetails' fermentable.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
-                <a href="{% url 'beer_recipes:FermentableUpdate' fermentable.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
-                <a href="{% url 'beer_recipes:FermentableDelete' fermentable.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+                <a href="{% url 'beer_recipes:FermentableDetails' fermentable.id %}" role="button" class="btn btn-sm btn-outline-secondary">View</a>
+                <a href="{% url 'beer_recipes:FermentableUpdate' fermentable.id %}" role="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a href="{% url 'beer_recipes:FermentableDelete' fermentable.id %}" role="button" class="btn btn-sm btn-outline-secondary">Delete</a>
               </div>
               <small class="text-muted">{{ fermentable.date_submitted }}</small>
             </div>
@@ -85,9 +87,9 @@
             <p class="card-text">{{ misc.description|truncatechars:125 }}...</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="{% url 'beer_recipes:MiscDetails' misc.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
-                <a href="{% url 'beer_recipes:MiscUpdate' misc.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
-                <a href="{% url 'beer_recipes:MiscDelete' misc.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+                <a href="{% url 'beer_recipes:MiscDetails' misc.id %}" role="button" class="btn btn-sm btn-outline-secondary">View</a>
+                <a href="{% url 'beer_recipes:MiscUpdate' misc.id %}" role="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a href="{% url 'beer_recipes:MiscDelete' misc.id %}" role="button" class="btn btn-sm btn-outline-secondary">Delete</a>
               </div>
               <small class="text-muted">{{ misc.date_submitted }}</small>
             </div>
@@ -110,9 +112,9 @@
             <p class="card-text">{{ water.description|truncatechars:125 }}...</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="{% url 'beer_recipes:WaterDetails' water.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
-                <a href="{% url 'beer_recipes:WaterUpdate' water.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
-                <a href="{% url 'beer_recipes:WaterDelete' water.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+                <a href="{% url 'beer_recipes:WaterDetails' water.id %}" role="button" class="btn btn-sm btn-outline-secondary">View</a>
+                <a href="{% url 'beer_recipes:WaterUpdate' water.id %}" role="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a href="{% url 'beer_recipes:WaterDelete' water.id %}" role="button" class="btn btn-sm btn-outline-secondary">Delete</a>
               </div>
               <small class="text-muted">{{ water.date_submitted }}</small>
             </div>
@@ -135,9 +137,9 @@
             <p class="card-text">{{ yeast.description|truncatechars:125 }}...</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="{% url 'beer_recipes:YeastDetails' yeast.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
-                <a href="{% url 'beer_recipes:YeastUpdate' yeast.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
-                <a href="{% url 'beer_recipes:YeastDelete' yeast.id %}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
+                <a href="{% url 'beer_recipes:YeastDetails' yeast.id %}" role="button" class="btn btn-sm btn-outline-secondary">View</a>
+                <a href="{% url 'beer_recipes:YeastUpdate' yeast.id %}" role="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a href="{% url 'beer_recipes:YeastDelete' yeast.id %}" role="button" class="btn btn-sm btn-outline-secondary">Delete</a>
               </div>
               <small class="text-muted">{{ yeast.date_submitted }}</small>
             </div>

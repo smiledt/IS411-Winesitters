@@ -7,7 +7,7 @@ class RecipeForm(forms.ModelForm):
     class Meta:
         model = BeerRecipe
         fields = ['name', 'description', 'brewer',
-                  'batch_size', 'boil_size', 'boil_time', 'type']
+                  'batch_size', 'boil_size', 'boil_time', 'type', 'image']
 
 
 class HopForm(forms.ModelForm):
