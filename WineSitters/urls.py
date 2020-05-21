@@ -20,12 +20,12 @@ from django.conf import settings
 
 
 urlpatterns = [
-    path('beer_recipes/', include('beer_recipes.urls')),
+    path('wine_recipes/', include('wine_recipes.urls')),
     path('users/', include('users.urls')),
 
 
     # index page
-    path('', include('wine_recipes.urls')),
+    path('', include('beer_recipes.urls')),
 
     # django pregenerated admin path
     path('admin/', admin.site.urls),

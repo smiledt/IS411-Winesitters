@@ -16,11 +16,11 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-md-7 py-4">
-            <h4 class="text-white">User Beer Recipes</h4>
+            <h4 class="text-white">User Wine Recipes</h4>
             <p class="text-muted">Use the menu to the right to create or edit your ingredients.
               Then, use those ingredients to create recipes below.</p>
-            <a href="{% url 'wine_recipes:land %'}" ><h4 class="text-white">User Wine Recipes</h4></a>
-            <p class="text-muted">We also have a great selection of wine recipes for you to try.</p>
+              <a href="{% url 'beer_recipes:index %'}" ><h4 class="text-white">User Beer Recipes</h4></a>
+              <p class="text-muted">We also have a great selection of beer recipes for you to try.</p>
           </div>
           {% if user.is_authenticated %}
           <!-- Check if the user is logged in -->
@@ -38,9 +38,9 @@
             </div>
 
             <ul class="list-unstyled">
-              <li><a href="{% url 'beer_recipes:my_ingredients' %}" class="text-white">My Ingredients</a></li>
-              <li><a href="{% url 'beer_recipes:my_recipes' %}" class="text-white">My Recipes</a></li>
-              <li><a href="{% url 'beer_recipes:recipes' %}" class="text-white">All Recipes</a></li>
+              <li><a href="{% url 'wine_recipes:my_ingredients' %}" class="text-white">My Ingredients</a></li>
+              <li><a href="{% url 'wine_recipes:my_recipes' %}" class="text-white">My Recipes</a></li>
+              <li><a href="{% url 'wine_recipes:recipes' %}" class="text-white">All Recipes</a></li>
             </ul>
           </div>
           {% else %} <! -- User is not logged in -->
@@ -58,12 +58,12 @@
     </div>
     <div class="navbar navbar-dark bg-dark box-shadow">
       <div class="container d-flex justify-content-between">
-        <a href="{% url 'beer_recipes:recipes' %}" class="navbar-brand d-flex align-items-center">
+        <a href="{% url 'wine_recipes:recipes' %}" class="navbar-brand d-flex align-items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
             <circle cx="12" cy="13" r="4"></circle>
           </svg>
-          <strong>Beer Recipes</strong>
+          <strong>Wine Recipes</strong>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

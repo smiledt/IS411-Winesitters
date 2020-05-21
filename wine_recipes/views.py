@@ -9,6 +9,8 @@ def index(request):
     """ Home Page for the wine_recipes app, may be temporary """
     return render(request, 'wine_recipes/index.html')
 
+def land(request):
+    return render(request,'wine_recipes/landing_page.html')
 
 def recipes(request, message="", error=""):
     """ Displays all the recipes in a list """
@@ -26,6 +28,16 @@ def view_recipe(request):
         temp = request.GET['view_recipe']
         temp_recipe = WineRecipe.objects.get(name__startswith=temp)
         return render(request, 'wine_recipes/view_recipe.html', temp_recipe)
+
+
+@login_required
+def my_ingredients(request):
+    return redirect('wine_recipes:index')
+
+
+@login_required
+def my_recipes(request):
+    return redirect('wine_recipes:index')
 
 
 @login_required
